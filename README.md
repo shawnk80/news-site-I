@@ -1,104 +1,70 @@
-# Overview
-In this challenge, we will focus on creating three components that we will later use as we create a news site similar to [Reddit](https://www.reddit.com/).
+# Getting Started with Create React App
 
-## Initial Setup
-To start, create a new create-react-app project from your terminal: `npx create-react-app news-site-i`
-In your new project, copy over the `components` and `data` directories under `src/` and replace the boilerplate `App.js` with the one given here.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Each of the three components listed below has been stubbed out - your mission is to create the content that the component should `render`, and handle the `props` that are being passed in appropriately. For the first pass of this challenge, all components will be class-based.
+## Available Scripts
 
-Before diving in, it may be helpful to inspect the files in the `data` directory so you know the shape of the data your app will be handling.
+In the project directory, you can run:
 
+### `npm start`
 
-## Component I: ArticleTeaser
-The `ArticleTeaser` component should accept the following `props` from `App.js`:
-1. `id` - a number
-2. `title` - a string
-3. `created_date` - a string
-4. `handleTitleClick` - a event handling function
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-All of these `props` will always be passed in.
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
 
-The `ArticleTeaser` component should:
-1. Display the `title` inside of an `<a>` tag.
-2. When the `title` `<a>` tag is clicked, it should call `this.props.handleTitleClick(this.props.id);`. Will arrow functions be useful here?
-3. Display the `created_date` in a `<p>` tag.
+### `npm test`
 
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-## Component II: Article
-In `App.js`, you'll notice that when the `Article` component is rendered, we pass `{...article}` to the component. This is known as the spread syntax. You can read more about it [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax). Rather than passing the entire `article` object, we are spreading its properties to be passed down via `props`.
-Therefore, the `Article` component should accept the following `props`:
-1. `title` - a string
-2. `created_date` - a string
-3. `abstract` - a string
-4. `byline` - a string (optional)
-5. `image` - a url string (optional)
+### `npm run build`
 
-The `title`, `abstract`, and `created_date` `props` will always contain values. `image` and `byline` may be set, but they may also be null. Be sure to account for this.
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The `Article` component should:
-1. Display the `title` inside of an `<h1>` tag.
-2. Display the `created_date` in a `<p>` tag.
-3. Display the `byline` (if it exists) in an `<h2>` tag.
-4. Display the `image` (if it exists) in an `<img>` tag (the value of `image` should be set to the `src` attribute of the `<img>` tag).
-5. Display the `abstract` inside of a `<p>` tag.
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-#### Sidenote: Conditional rendering in React
-How do I only render something if the data exists? There are several ways we can handle this in React. Here we will explore three common options:
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-**Option 1: `&&`**
+### `npm run eject`
 
-```javascript
-// in the render
-<ParentComponent>
-  {dataExists && <ChildComponent>}
-</ParentComponent>
-```
-Explanation: If there is just one piece of data we're checking for, we can do a quick existence check which will coerce the data to a boolean value `true` if the data does exist and then render the component/element that follows `&&`. If the data doesn't exist, it will be coerced to a boolean value `false` and will not render the child component/element.
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-**Option 2: Create a helper render function**
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-```javascript
-renderIfDataExists = () => {
-  if (dataExists) {
-    return <ChildComponent />
-  }
-};
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-// in the render
-<ParentComponent>
-  {this.renderIfDataExists()}
-</ParentComponent>
-```
-Explanation: This is a common pattern for rendering that involves more complex logic. For example, if our `dataExists` check was looking for multiple pieces of data, we might want to extract it out into this helper function.
-(Also note that the above code snippet assumes a class-based React component. What would be different if it were written in a functional component?)
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-**Option 3: Use a ternary operator**
-```javascript
-<ParentComponent>
-  { dataExists ? <ChildComponent /> : '' }
-</ParentComponent>
-```
-Explanation: This is a good option to use if you are choosing between two different components/elements to render, but you can technically just render an empty string or `null` as seen above.
+## Learn More
 
-## Component III: AppNav
-The `AppNav` component should accept the following `props`:
-1. `navItems` - an array of navItem objects.
-2. `handleNavClick` - a function.
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-The `AppNav` component should return a `<nav>` component that contains `<a>`'s as children - one for every item in the `this.props.navItems` array.
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-The AppNav component should:
-1) Map through `this.props.navItems` to create an array of `<a>` elements. The objects within `this.props.navItems` look something like this:
-```
-{
-  label: "NYREGION",
-  value: "nyregion"
-}
-```
-When transforming/mapping the `nav` item objects in `this.props.navItems` into an array of `<a>` tags, you'll want to use the `label` property (displayed in the example above) as the text that appears on screen. At the same time, you will want to attach an event handler to each `<a>`'s `onClick` event. `onClick` should call `this.props.handleNavClick`, and pass the 'value' property from the `nav` item object.
+### Code Splitting
 
-**You are done when all of your data is displayed and your `onClick` events are firing for your AppNav links and your ArticleTeaser links (i.e. you should see the `console.log`s)**
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-## Now make it Functional!
-After you've committed your changes, open a new branch called `functional-version`. In this new branch, refactor your class-based components into functional ones. This may seem silly, but this is a large part of working in a real legacy React codebase, so understanding how to do these sorts of refactors is critical. Be sure to have BOTH versions of your work -- `master` as class-based and `functional-version` as functional. We will continue work on both in the future.
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
