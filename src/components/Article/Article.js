@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Article extends Component {
-  render() {  
-    return (
-      <div>
-        <h1> {this.props.title } </h1>
-        <p> {this.props.created_date }</p>
-        { this.props.byline ? <h2> {this.props.byline} </h2> : null }
-        { this.props.image ? <img src={this.props.image} href="#" alt="" /> : null }
-        <p> { this.props.abstract } </p>
-      </div>
-    )
-  }
+function Article(props) {
+
+  return (
+    <div>
+      <h1> {props.title } </h1>
+      <p> {props.created_date }</p>
+      { props.byline ? <h2> {props.byline} </h2> : null }
+      { props.image ? <img src={props.image} href="#" alt="" /> : null }
+      <p> { props.abstract } </p>
+    </div>
+  )
+
 }
 
 export default Article;

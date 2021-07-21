@@ -1,32 +1,26 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import News from './data/news.json';
-import navItems from './data/navItems.json';
+import navItemData from './data/navItems.json';
 import './App.css';
 import AppNav from './components/AppNav/AppNav.js';
 import ArticleTeaser from './components/ArticleTeaser/ArticleTeaser.js'
 import Article from './components/Article/Article.js'
 
-class App extends Component {
-  constructor(props) {
-    super(props);
+function App() {
+  
     const randomArticleIndex = Math.floor(Math.random() * News.length);
     const randomArticle = News[randomArticleIndex];
-
-    this.state = {
-      navItems: navItems,
-      article: {
-        id: randomArticleIndex,
-        title: randomArticle.title,
-        abstract: randomArticle.abstract,
-        byline: randomArticle.byline,
-        image: randomArticle.multimedia.length ? randomArticle.multimedia[0].url : null,
-        created_date: randomArticle.created_date
-      }
+    const testArticle = {
+      id: randomArticleIndex,
+      title: randomArticle.title,
+      abstract: randomArticle.abstract,
+      byline: randomArticle.byline,
+      image: randomArticle.multimedia.length ? randomArticle.multimedia[0].url : null,
+      created_date: randomArticle.created_date
     }
-  }
 
-  render() {
-    const { article, navItems } = this.state
+    const [navItems, setNavItems] = useState(navItemData);
+    const [article, setArticle] = useState(testArticle);
 
     return (
       <div>
@@ -50,7 +44,7 @@ class App extends Component {
         <Article {...article} />
       </div>
     );
-  }
+  
 }
 
 export default App;

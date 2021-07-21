@@ -1,23 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class AppNav extends Component {
+function AppNav (props) {
 
-  renderNavItems = () => {
-    return this.props.navItems.map((item, index) => { return ( <span>&nbsp;&nbsp; <a href="#" key={`nav-${index}`} onClick={ () => this.props.handleNavClick(item.value) }>{ item.label } </a>
+  const renderNavItems = () => {
+    return props.navItems.map((item, index) => { return ( <span>&nbsp;&nbsp; <a href="#" key={`nav-${index}`} onClick={ () => props.handleNavClick(item.value) }>{ item.label } </a>
     &nbsp;&nbsp;| </span> ) } 
     )
   }
 
 
-  render() {
-    return (
-      <nav>
-        { this.renderNavItems() }
-      </nav>
-    )
-  }
+
+  return (
+    <nav>
+      { renderNavItems() }
+    </nav>
+  )
+
 }
 
 export default AppNav;
-
-// href="" key={`nav-${index}`} onClick={ () => this.props.handleNavClick(item.value)}
